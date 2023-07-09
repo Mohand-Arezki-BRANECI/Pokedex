@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+    {{ 'Inscription' }}
+{% endblock %}
+
+{%block stylesheets%}
+    <link href="{{ asset('css/login.css') }}" rel="stylesheet" />
+{%endblock%}
+
+
+
+
+{% block body %}
+
+<div class="main">
+    <div class="container b-container is-txl is-z200" id="b-container">
+        {{ form_start(form, {'attr': {'class': 'form','id': 'a-form'}}) }}
+        <div class="form__label">{{ form_label(form.username, 'Username') }}</div>
+        {{ form_widget(form.username, {'attr': {'class': 'form__input', 'placeholder': 'Username'}}) }}
+        <div class="form__label">{{ form_label(form.email, 'Email') }}</div>
+        {{ form_widget(form.email, {'attr': {'class': 'form__input', 'placeholder': 'Email'}}) }}
+        <div class="form__label">{{ form_label(form.password, 'Password') }}</div>
+        {{ form_widget(form.password, {'attr': {'class': 'form__input', 'placeholder': 'Password'}}) }}
+        <div class="form__label">{{ form_label(form.repeat_password, 'Confirm Password') }}</div>
+        {{ form_widget(form.repeat_password, {'attr': {'class': 'form__input', 'placeholder': 'Confirm Password'}}) }}
+        <br>
+        <button class="form__button button" type="submit">Register</button>
+        {{ form_end(form) }}
+        
+        <p class="">You already have an account? Sign In</p>
+        <a href="{{ path('app_login') }}">Sign In</a>
+   </div>
+
+    
+     
+    
+
+{% endblock %}
+{% block javascripts %}
+
+{% endblock %}
+

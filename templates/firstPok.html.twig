@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+    {{ 'premier pokemon' }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/firstpokstyle.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Heebo:100,300,400,500,700,800,900'>
+    <link rel="stylesheet" href="./style.css">
+{% endblock %}
+
+{% block body %}
+
+    <main id="app">
+
+        <h1>Here is a welcome gift from us!</h1>
+        
+
+        <section class="cards">
+            {% set randomIndex = random(0, 9) %}
+            {% set pokemons = ['Zekrom', 'Victini', 'Snivy','Reshiram', 'Pikachu', 'Pansage', 'Oshawott', 'Kyurem', 'Jangmo','Drampa'] %}
+            {% set randomPokemon = pokemons[randomIndex] %}
+            {% set pokemonImages = {
+                'Zekrom': 'img/Zekrom.png',
+                'Victini': 'img/Victini.png',
+                'Snivy': 'img/Snivy.png',
+                'Reshiram': 'img/Reshiram.png',
+                'Pikachu': 'img/Pikachu.png',
+                'Pansage': 'img/Pansage.png',
+                'Oshawott': 'img/Oshawott.png',
+                'Kyurem': 'img/Kyurem.png',
+                'Jangmo': 'img/Jangmo.png',
+                'Drampa': 'img/Drampa.png',
+            } %}
+            <h2>Your first-ever Pokémon! It's <i>{{ randomPokemon }}</i></h2>
+            
+            <a href="/FirstPokemon/{{ randomPokemon }}">
+                    <img class="card"
+                    src="{{ asset(pokemonImages[randomPokemon]) }}" alt="">
+            </a>
+        </section>
+
+    </main>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="{{ asset('css/firstpokscript.css') }}"></script>
+    <script>
+        function random(min, max) {
+            return Math.floor(Math.random() * (max - min + 1) + min);
+        }
+    </script>
+{% endblock %}

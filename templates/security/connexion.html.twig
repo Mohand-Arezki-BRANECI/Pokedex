@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+    {{ 'Connexion' }}
+{% endblock %}
+
+{%block stylesheets%}
+    {{ parent() }}
+    <link href="{{ asset('css/login.css') }}" rel="stylesheet" />
+    <style>
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 25px;
+            height: 100%;
+            text-align: center; /* Add this line */
+
+          }
+          
+
+    </style>
+{%endblock%}
+
+
+
+
+{% block body %}
+
+<div class="main">
+    <div class= "container b-container is-txl is-z200" id="b-container">
+        <form class="form" id="b-form" method="post" >
+            {% if error %}
+                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
+
+            {% if app.user %}
+                <div class="mb-3">
+                    You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+                </div>
+            {% endif %}
+
+            <h2 class="form_title title">Connecter Vous</h2>
+            <input class="form__input" type="text" placeholder="Email" name="email" id="inputEmail" value="{{ last_username }}" required>
+            <input class="form__input" type="password" placeholder="Password"  name="password" id="inputPassword" required>
+
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+            <br>
+            <button class="form__button button " type="submit" >Sign In</button>
+        </form>
+       
+        <p class="switch__description description">You don't have an account yet? Sign Up!</p>
+           <a href="{{path("inscription")}}"><span>Sign Up</span></a>
+    </div>
+
+            
+   
+
+{% endblock %}
+

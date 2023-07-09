@@ -1,0 +1,115 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Hunting
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/sstyle.css') }}">
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
+
+    {% endblock %}
+
+{% block body %}
+<div class="app">
+    <div class="header">
+        <img class="menu-circle" src="{{ asset('img/logo.png') }}" alt="" />
+        <div class="header-menu ml-5">
+            <a class="menu-link  ml-5" href="/profile">My Pokémons</a>
+            <a class="menu-link  ml-5" href="/market">Market</a>
+            <a class="menu-link  ml-5 is-active" href="/hunting">Hunting</a>
+            <a class="menu-link  ml-5" href="{{ path('app_logout') }}">Log Out</a>
+        </div>
+    </div>
+    <div class="wrapper">
+        <div class="left-side">
+            <div class="side-wrapper">
+                <div class="side-menu">
+                    <p>Welcome {{ user.username }}</p>
+                    <p>{{ user.email }}</p>
+                    <p>$ {{ user.coins }}</p>
+                </div>
+            </div>
+            <div class="side-wrapper">
+                <div class="side-title"></div>
+                <div class="side-menu"></div>
+            </div>
+        </div>
+        <div class="main-container">
+            <div class="content-wrapper">
+                <div class="content-section" id="Market">
+                    <div class="button-wrapper">
+                        <div class="pop-up" id="chasser">
+                            <div class="pop-up__title"> Hunt for a new pokémon
+                                <svg class="close" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle">
+                                    <circle cx="12" cy="12" r="10" />
+                                    <path d="M15 9l-6 6M9 9l6 6" />
+                                </svg>
+                            </div>
+                            <form id="chasserforme" action="/Chasser" method="post">
+                                <div class="pop-up__subtitle">Choose the pokémon that is going to hunt with you
+                                    <select name="pokemon" id="pokemon">
+                                        {% for pokemon in user.mesPokemons %}
+                                            {% if pokemon.action == 'normale' %}
+                                                <option value="{{ pokemon.id }}">{{ pokemon.pokemon.nom }}</option>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="checkbox-wrapper"></div>
+                                <div class="content-button-wrapper">
+                                    <button type="submit" class="content-button status-button">Hunt</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="universe-section">
+                        <div class="universe">
+                            <a href="#" class="worldbutton" onclick="chasser('montagne'); return false;">Mountain</a>
+                            Pokémon Categories that are found in the Mountain: ACIER, Dragon, Glace, Normal, Roche.
+                            
+                        </div>
+
+                        <br>
+                        <br>
+                        <div class="universe">
+                            <a href="#" class="worldbutton" onclick="chasser('foret'); return false;">Forest</a>
+                            Pokémon Categories that are found in the Forest: Insect, Normal, spectre, vol.
+                        </div>
+
+                        <br>
+                        <br>
+
+                        <div class="universe">
+                            <a href="#" class="worldbutton" onclick="chasser('prairie'); return false;">Meadow</a>
+                            Pokémon Categories that are found in the Meadow: FEU, Normal, plante, sol, vol, feu.
+
+                        </div>
+
+                        <br>
+                        <br>
+                        <div class="universe">
+                            <a href="#" class="worldbutton" onclick="chasser('ville'); return false;">City</a>
+                            Pokémon Categories that are found in the City: Combat, Electrik, Normal, Psy.
+                        </div>
+                        <br>
+                        <br>
+                        <div class="universe">
+                            <a href="#" class="worldbutton" onclick="chasser('plage'); return false;">Beach</a>
+                            Pokémon Categories that are found in the Beach: Dragon, EAU, Normal, Poinson.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="overlay-app"></div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="{{ asset('js/script.js') }}"></script>
+<script src="{{ asset('js/timer.js') }}"></script>
+{% endblock %}
